@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: esp32-line-cloud1
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: LINE_CHANNEL_SECRET
+        sync: false
+      - key: LINE_CHANNEL_ACCESS_TOKEN
+        sync: false
+      - key: DEVICE_KEY
+        sync: false
+      - key: LINE_USER_ID
+        sync: false
